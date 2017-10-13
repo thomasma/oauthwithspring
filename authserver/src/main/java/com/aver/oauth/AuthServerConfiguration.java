@@ -36,8 +36,9 @@ public class AuthServerConfiguration extends AuthorizationServerConfigurerAdapte
     }
 
     @Override
-    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
+    public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
+        oauthServer.tokenKeyAccess("isAnonymous() || hasAuthority('ROLE_TRUSTED_CLIENT')")
+                .checkTokenAccess("hasAuthority('ROLE_TRUSTED_CLIENT')");
     }
 
     @Bean

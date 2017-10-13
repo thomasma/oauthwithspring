@@ -1,6 +1,5 @@
 package com.aver.oauth;
 
-import java.security.Principal;
 import java.util.Collections;
 import java.util.Map;
 
@@ -29,6 +28,7 @@ public class ResourceServerApplication {
     @PreAuthorize("#oauth2.hasScope('write')")
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public Map<String, String> home() {
+        logger.info("I have been invoked. I will now return a hello message.");
         return Collections.singletonMap("message", "Hello from OAuth enabled endpoint.");
     }
 }
